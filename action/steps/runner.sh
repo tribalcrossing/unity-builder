@@ -31,13 +31,25 @@ echo "Using build target \"$BUILD_TARGET\"."
 
 echo "Using Unity version \"$UNITY_VERSION\" to run."
 
-#
-# Overall info
-#
+echo ""
+echo "###########################"
+echo "#    Build CSPROJ files   #"
+echo "###########################"
+echo ""
+xvfb-run --auto-servernum --server-args='-screen 0 640x480x24' \
+/opt/Unity/Editor/Unity \
+  -batchmode \
+  -nographics \
+  -logfile /dev/stdout \
+  -silent-crashes \
+  -buildTarget "$BUILD_TARGET" \
+  -customBuildTarget "$BUILD_TARGET" \
+  -quit -executeMethod "UnityEditor.SyncVS.SyncSolution"
 
-echo "#############################################"
-echo "#    Install DotNet and Run Unit Test       #"
-echo "#############################################"
+
+echo "############################"
+echo "#    Install DotNet        #"
+echo "############################"
 
 wget https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 dpkg -i packages-microsoft-prod.deb
@@ -51,14 +63,8 @@ chmod -R 777 *
 cd Lit.Tests
 dotnet tool install --global Project2015To2017.Migrate2019.Tool
 export PATH="$PATH:~/.dotnet/tools"
-ls -lasthr Lit.Tests
-ls -lasthr Lit.Tests
 dotnet migrate-2019 migrate Lit.Tests.sln
 cd ..
-pwd
-cd ~/
-pwd
-cd $UNITY_PROJECT_PATH
 
 echo ""
 echo "###########################"
@@ -74,21 +80,6 @@ echo "#    Project directory    #"
 echo "###########################"
 echo ""
 ls -alh $UNITY_PROJECT_PATH
-
-echo ""
-echo "###########################"
-echo "#    Build CSPROJ files   #"
-echo "###########################"
-echo ""
-xvfb-run --auto-servernum --server-args='-screen 0 640x480x24' \
-/opt/Unity/Editor/Unity \
-  -batchmode \
-  -nographics \
-  -logfile /dev/stdout \
-  -silent-crashes \
-  -buildTarget "$BUILD_TARGET" \
-  -customBuildTarget "$BUILD_TARGET" \
-  -quit -executeMethod "UnityEditor.SyncVS.SyncSolution"
 
 
 echo ""

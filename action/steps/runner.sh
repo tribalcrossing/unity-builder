@@ -46,12 +46,12 @@ apt-get update
 apt-get -y install apt-transport-https
 apt-get update
 apt-get -y install dotnet-sdk-2.1
-pushd "$UNITY_PROJECT_PATH/Lit.Tests"
+cd Lit.Tests
 dotnet tool install --global Project2015To2017.Migrate2019.Tool
 dotnet-migrate-2019 migrate Lit.Tests.sln
 dotnet restore Lit.Tests.sln
 dotnet test Lit.Tests.sln --no-restore --verbosity normal
-popd
+cd ..
 
 echo ""
 echo "###########################"

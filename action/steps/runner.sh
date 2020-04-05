@@ -59,6 +59,22 @@ apt-get -y install apt-transport-https
 apt-get update
 apt-get -y install dotnet-sdk-2.1
 apt-get -y install dotnet-sdk-3.1
+chmod -R 777 * 
+cd Lit.Tests
+dotnet tool install --global Project2015To2017.Migrate2019.Tool
+export PATH="$PATH:~/.dotnet/tools"
+dotnet migrate-2019 migrate Lit.Tests.sln
+cd ..
+
+echo ""
+echo "###########################"
+echo "#    Change Framework     #"
+echo "###########################"
+echo ""
+cat Assembly-CSharp.csproj
+sed -i 's/TargetFramework>net471<\/TargetFramework/TargetFramework>netcoreapp3.1<\/TargetFramework/g' *.csproj
+cat Assembly-CSharp.csproj
+
 
 echo ""
 echo "###########################"

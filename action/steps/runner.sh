@@ -35,6 +35,24 @@ echo "Using Unity version \"$UNITY_VERSION\" to run."
 # Overall info
 #
 
+echo "#############################################"
+echo "#    Install DotNet and Run Unit Test       #"
+echo "#############################################"
+
+wget https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+sudo add-apt-repository universe
+sudo apt-get update
+sudo apt-get install apt-transport-https
+sudo apt-get update
+sudo apt-get install dotnet-sdk-2.1
+pushd "$UNITY_PROJECT_PATH/Lit.Tests"
+dotnet tool install --global Project2015To2017.Migrate2019.Tool
+dotnet-migrate-2019 migrate Lit.Tests.sln
+dotnet restore Lit.Tests.sln
+dotnet test Lit.Tests.sln --no-restore --verbosity normal
+popd
+
 echo ""
 echo "###########################"
 echo "#    Artifacts folder     #"

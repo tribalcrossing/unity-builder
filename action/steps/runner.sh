@@ -43,9 +43,9 @@ wget https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.
 dpkg -i packages-microsoft-prod.deb
 add-apt-repository universe
 apt-get update
-apt-get install apt-transport-https
+apt-get -y install apt-transport-https
 apt-get update
-apt-get install dotnet-sdk-2.1
+apt-get -y install dotnet-sdk-2.1
 pushd "$UNITY_PROJECT_PATH/Lit.Tests"
 dotnet tool install --global Project2015To2017.Migrate2019.Tool
 dotnet-migrate-2019 migrate Lit.Tests.sln
@@ -69,15 +69,15 @@ echo ""
 ls -alh $UNITY_PROJECT_PATH
 
 
-xvfb-run --auto-servernum --server-args='-screen 0 640x480x24' \
-/opt/Unity/Editor/Unity \
-  -batchmode \
-  -nographics \
-  -logfile /dev/stdout \
-  -silent-crashes \
-  -buildTarget "$BUILD_TARGET" \
-  -customBuildTarget "$BUILD_TARGET" \
-  $CUSTOM_PARAMETERS
+# xvfb-run --auto-servernum --server-args='-screen 0 640x480x24' \
+# /opt/Unity/Editor/Unity \
+#   -batchmode \
+#   -nographics \
+#   -logfile /dev/stdout \
+#   -silent-crashes \
+#   -buildTarget "$BUILD_TARGET" \
+#   -customBuildTarget "$BUILD_TARGET" \
+#   $CUSTOM_PARAMETERS
 
 #
 # Results

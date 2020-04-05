@@ -48,9 +48,7 @@ apt-get update
 apt-get -y install dotnet-sdk-2.1
 cd Lit.Tests
 dotnet tool install --global Project2015To2017.Migrate2019.Tool
-dotnet-migrate-2019 migrate Lit.Tests.sln
-dotnet restore Lit.Tests.sln
-dotnet test Lit.Tests.sln --no-restore --verbosity normal
+dotnet migrate-2019 migrate Lit.Tests.sln
 cd ..
 
 echo ""
@@ -68,16 +66,35 @@ echo "###########################"
 echo ""
 ls -alh $UNITY_PROJECT_PATH
 
+echo ""
+echo "###########################"
+echo "#    Build CSPROJ files   #"
+echo "###########################"
+echo ""
+xvfb-run --auto-servernum --server-args='-screen 0 640x480x24' \
+/opt/Unity/Editor/Unity \
+  -batchmode \
+  -nographics \
+  -logfile /dev/stdout \
+  -silent-crashes \
+  -buildTarget "$BUILD_TARGET" \
+  -customBuildTarget "$BUILD_TARGET" \
+  $CUSTOM_PARAMETERS
 
-# xvfb-run --auto-servernum --server-args='-screen 0 640x480x24' \
-# /opt/Unity/Editor/Unity \
-#   -batchmode \
-#   -nographics \
-#   -logfile /dev/stdout \
-#   -silent-crashes \
-#   -buildTarget "$BUILD_TARGET" \
-#   -customBuildTarget "$BUILD_TARGET" \
-#   $CUSTOM_PARAMETERS
+
+echo ""
+echo "###########################"
+echo "#  Restore Dependencies   #"
+echo "###########################"
+echo ""
+dotnet restore Lit.Tests/Lit.Tests.sln
+
+echo ""
+echo "########################"
+echo "#    Run Unit Test     #"
+echo "########################"
+echo ""
+dotnet test Lit.Tests/Lit.Tests.sln --no-restore --verbosity normal
 
 #
 # Results

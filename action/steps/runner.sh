@@ -79,7 +79,7 @@ xvfb-run --auto-servernum --server-args='-screen 0 640x480x24' \
   -silent-crashes \
   -buildTarget "$BUILD_TARGET" \
   -customBuildTarget "$BUILD_TARGET" \
-  $CUSTOM_PARAMETERS
+  -quit -executeMethod "UnityEditor.SyncVS.SyncSolution"
 
 
 echo ""

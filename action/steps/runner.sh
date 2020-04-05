@@ -47,9 +47,12 @@ apt-get -y install apt-transport-https
 apt-get update
 apt-get -y install dotnet-sdk-2.1
 apt-get -y install dotnet-sdk-3.1
+chmod -R 777 * 
 cd Lit.Tests
 dotnet tool install --global Project2015To2017.Migrate2019.Tool
 export PATH="$PATH:~/.dotnet/tools"
+ls -lasthr Lit.Tests
+ls -lasthr Lit.Tests
 dotnet migrate-2019 migrate Lit.Tests.sln
 cd ..
 pwd

@@ -57,9 +57,9 @@ add-apt-repository universe
 apt-get update
 apt-get -y install apt-transport-https
 apt-get update
-apt-get -y install dotnet-sdk-2.1
-apt-get -y install dotnet-sdk-3.1
-apt-get -y install nuget
+apt-get -y -qq install dotnet-sdk-2.1
+apt-get -y -qq install dotnet-sdk-3.1
+apt-get -y -qq install nuget
 chmod -R 777 * 
 dotnet restore workspace.sln
 dotnet restore Lit.Tests/Lit.Tests.sln
@@ -80,6 +80,13 @@ ls -lasthr
 cd Lit.Tests
 dotnet tool install --global Project2015To2017.Migrate2019.Tool
 export PATH="$PATH:~/.dotnet/tools"
+cd ..
+dotnet migrate-2019 migrate workspace.sln
+dotnet migrate-2019 migrate Assembly-CSharp.csproj
+dotnet migrate-2019 migrate Assembly-CSharp-firstpass.csproj
+dotnet migrate-2019 migrate Assembly-CSharp-Editor.csproj
+dotnet migrate-2019 migrate LAssembly-CSharp-Editor-firstpass.csproj
+cd Lit.Tests
 dotnet migrate-2019 migrate Lit.Tests.sln
 cd ..
 

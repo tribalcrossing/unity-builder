@@ -59,13 +59,14 @@ apt-get -y install apt-transport-https
 apt-get update
 apt-get -y install dotnet-sdk-2.1
 apt-get -y install dotnet-sdk-3.1
+apt-get -y install nuget
 chmod -R 777 * 
-dotnet restore Assembly-CSharp.csproj
-dotnet restore Assembly-CSharp-firstpass.csproj
-dotnet restore Assembly-CSharp-Editor.csproj
-dotnet restore Assembly-CSharp-Editor-firstpass.csproj
-dotnet restore lit.sln
+dotnet restore workspace.sln
 dotnet restore Lit.Tests/Lit.Tests.sln
+nuget restore Assembly-CSharp.csproj
+nuget restore Assembly-CSharp-firstpass.csproj
+nuget restore Assembly-CSharp-Editor.csproj
+nuget restore Assembly-CSharp-Editor-firstpass.csproj
 ls -lasthr
 
 cd Lit.Tests

@@ -63,10 +63,18 @@ apt-get -y install nuget
 chmod -R 777 * 
 dotnet restore workspace.sln
 dotnet restore Lit.Tests/Lit.Tests.sln
+nuget restore workspace.sln
+echo "nuget restore workspace.sln"
+nuget restore Lit.Tests/Lit.Tests.sln
+echo "nuget restore Lit.Tests/Lit.Tests.sln"
 nuget restore Assembly-CSharp.csproj
+echo "nuget restore Assembly-CSharp.csproj"
 nuget restore Assembly-CSharp-firstpass.csproj
+echo "nuget restore Assembly-CSharp-firstpass.csproj"
 nuget restore Assembly-CSharp-Editor.csproj
+echo "nuget restore Assembly-CSharp-Editor.csproj"
 nuget restore Assembly-CSharp-Editor-firstpass.csproj
+echo "nuget restore Assembly-CSharp-Editor-firstpass.csproj"
 ls -lasthr
 
 cd Lit.Tests

@@ -64,7 +64,9 @@ dotnet restore Assembly-CSharp.csproj
 dotnet restore Assembly-CSharp-firstpass.csproj
 dotnet restore Assembly-CSharp-Editor.csproj
 dotnet restore Assembly-CSharp-Editor-firstpass.csproj
+dotnet restore lit.sln
 dotnet restore Lit.Tests/Lit.Tests.sln
+ls -lasthr
 
 cd Lit.Tests
 dotnet tool install --global Project2015To2017.Migrate2019.Tool
@@ -82,7 +84,14 @@ sed -i 's/TargetFramework>net471<\/TargetFramework/TargetFramework>netcoreapp3.1
 sed -i 's/TargetFramework>net471<\/TargetFramework/TargetFramework>netcoreapp3.1<\/TargetFramework/g' Assembly-CSharp-Editor.csproj
 sed -i 's/TargetFramework>net471<\/TargetFramework/TargetFramework>netcoreapp3.1<\/TargetFramework/g' Assembly-CSharp-Editor-firstpass.csproj
 
+echo "#    Change Framework    Assembly-CSharp.csproj  #"
 cat Assembly-CSharp.csproj
+echo "#    Change Framework    Assembly-CSharp-firstpass.csproj #"
+cat Assembly-CSharp-firstpass.csproj
+echo "#    Change Framework    Assembly-CSharp-Editor.csproj #"
+cat Assembly-CSharp-Editor.csproj
+echo "#    Change Framework    Assembly-CSharp-Editor-firstpass.csproj #"
+cat Assembly-CSharp-Editor-firstpass.csproj
 
 echo ""
 echo "###########################"

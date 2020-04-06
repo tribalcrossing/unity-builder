@@ -60,6 +60,12 @@ apt-get update
 apt-get -y install dotnet-sdk-2.1
 apt-get -y install dotnet-sdk-3.1
 chmod -R 777 * 
+dotnet restore Assembly-CSharp.csproj
+dotnet restore Assembly-CSharp-firstpass.csproj
+dotnet restore Assembly-CSharp-Editor.csproj
+dotnet restore Assembly-CSharp-Editor-firstpass.csproj
+dotnet restore Lit.Tests/Lit.Tests.sln
+
 cd Lit.Tests
 dotnet tool install --global Project2015To2017.Migrate2019.Tool
 export PATH="$PATH:~/.dotnet/tools"
@@ -71,16 +77,12 @@ echo "###########################"
 echo "#    Change Framework     #"
 echo "###########################"
 echo ""
-cat Assembly-CSharp-Editor.csproj
-sed -i 's/TargetFramework>net471<\/TargetFramework/TargetFramework>netcoreapp3.1<\/TargetFramework/g' *.csproj
-cat Assembly-CSharp-Editor.csproj
-
 sed -i 's/TargetFramework>net471<\/TargetFramework/TargetFramework>netcoreapp3.1<\/TargetFramework/g' Assembly-CSharp.csproj
 sed -i 's/TargetFramework>net471<\/TargetFramework/TargetFramework>netcoreapp3.1<\/TargetFramework/g' Assembly-CSharp-firstpass.csproj
 sed -i 's/TargetFramework>net471<\/TargetFramework/TargetFramework>netcoreapp3.1<\/TargetFramework/g' Assembly-CSharp-Editor.csproj
 sed -i 's/TargetFramework>net471<\/TargetFramework/TargetFramework>netcoreapp3.1<\/TargetFramework/g' Assembly-CSharp-Editor-firstpass.csproj
-cat Assembly-CSharp-Editor.csproj
 
+cat Assembly-CSharp.csproj
 
 echo ""
 echo "###########################"

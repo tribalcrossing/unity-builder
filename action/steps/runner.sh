@@ -97,10 +97,10 @@ echo "###########################"
 echo "#    Change Framework     #"
 echo "###########################"
 echo ""
-sed -i 's/TargetFramework>net471<\/TargetFramework/TargetFramework>netcoreapp3.1<\/TargetFramework/g' Assembly-CSharp.csproj
-sed -i 's/TargetFramework>net471<\/TargetFramework/TargetFramework>netcoreapp3.1<\/TargetFramework/g' Assembly-CSharp-firstpass.csproj
-sed -i 's/TargetFramework>net471<\/TargetFramework/TargetFramework>netcoreapp3.1<\/TargetFramework/g' Assembly-CSharp-Editor.csproj
-sed -i 's/TargetFramework>net471<\/TargetFramework/TargetFramework>netcoreapp3.1<\/TargetFramework/g' Assembly-CSharp-Editor-firstpass.csproj
+sed -i 's/TargetFramework>net471<\/TargetFramework/TargetFramework>netcoreapp2.1<\/TargetFramework/g' Assembly-CSharp.csproj
+sed -i 's/TargetFramework>net471<\/TargetFramework/TargetFramework>netcoreapp2.1<\/TargetFramework/g' Assembly-CSharp-firstpass.csproj
+sed -i 's/TargetFramework>net471<\/TargetFramework/TargetFramework>netcoreapp2.1<\/TargetFramework/g' Assembly-CSharp-Editor.csproj
+sed -i 's/TargetFramework>net471<\/TargetFramework/TargetFramework>netcoreapp2.1<\/TargetFramework/g' Assembly-CSharp-Editor-firstpass.csproj
 
 echo "#    Change Framework    Assembly-CSharp.csproj  #"
 cat Assembly-CSharp.csproj

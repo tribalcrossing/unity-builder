@@ -59,6 +59,7 @@ apt-get -y install dirmngr gnupg apt-transport-https ca-certificates apt-utils
 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
 sh -c 'echo "deb https://download.mono-project.com/repo/ubuntu stable-bionic main" > /etc/apt/sources.list.d/mono-official-stable.list'
 apt-get update
+apt-get -y -qq install dotnet-sdk-2.1
 apt-get -y -qq install dotnet-sdk-3.1
 apt-get update
 apt-get -y -qq install mono-complete mono-devel nuget

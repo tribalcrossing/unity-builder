@@ -116,7 +116,9 @@ echo "########################"
 echo "#    Run Unit Test     #"
 echo "########################"
 echo ""
-dotnet test Lit.Tests/Lit.Tests.sln --no-restore --logger "html;logfilename=test_result.html" --results-directory $FULL_ARTIFACTS_PATH
+
+echo $FULL_ARTIFACTS_PATH
+dotnet test Lit.Tests/Lit.Tests.sln --no-restore --logger "html;logfilename=test_result.html" --results-directory ./artifacts
 
 UNIT_TEST_CODE =$?
 TEST_RUNNER_EXIT_CODE=$UNIT_TEST_CODE

@@ -67,19 +67,23 @@ apt-get -y -qq install mono-complete mono-devel nuget
 chmod -R 777 * 
 dotnet restore workspace.sln
 dotnet restore Lit.Tests/Lit.Tests.sln
-nuget restore workspace.sln
-echo "nuget restore workspace.sln"
-nuget restore Lit.Tests/Lit.Tests.sln
-echo "nuget restore Lit.Tests/Lit.Tests.sln"
-nuget restore Assembly-CSharp.csproj
-echo "nuget restore Assembly-CSharp.csproj"
-nuget restore Assembly-CSharp-firstpass.csproj
-echo "nuget restore Assembly-CSharp-firstpass.csproj"
-nuget restore Assembly-CSharp-Editor.csproj
-echo "nuget restore Assembly-CSharp-Editor.csproj"
-nuget restore Assembly-CSharp-Editor-firstpass.csproj
-echo "nuget restore Assembly-CSharp-Editor-firstpass.csproj"
+nuget restore . -PackagesDirectory .
+# nuget restore workspace.sln
+# echo "nuget restore workspace.sln"
+# nuget restore Lit.Tests/Lit.Tests.sln
+# echo "nuget restore Lit.Tests/Lit.Tests.sln"
+# nuget restore Assembly-CSharp.csproj
+# echo "nuget restore Assembly-CSharp.csproj"
+# nuget restore Assembly-CSharp-firstpass.csproj
+# echo "nuget restore Assembly-CSharp-firstpass.csproj"
+# nuget restore Assembly-CSharp-Editor.csproj
+# echo "nuget restore Assembly-CSharp-Editor.csproj"
+# nuget restore Assembly-CSharp-Editor-firstpass.csproj
+# echo "nuget restore Assembly-CSharp-Editor-firstpass.csproj"
 ls -lasthr
+
+echo "do we have /github/workspace/packages.config"
+ls /github/workspace/packages.config
 
 cd Lit.Tests
 dotnet tool install --global Project2015To2017.Migrate2019.Tool
@@ -102,14 +106,14 @@ sed -i 's/TargetFramework>net471<\/TargetFramework/TargetFramework>netcoreapp3.1
 sed -i 's/TargetFramework>net471<\/TargetFramework/TargetFramework>netcoreapp3.1<\/TargetFramework/g' Assembly-CSharp-Editor.csproj
 sed -i 's/TargetFramework>net471<\/TargetFramework/TargetFramework>netcoreapp3.1<\/TargetFramework/g' Assembly-CSharp-Editor-firstpass.csproj
 
-echo "#    Change Framework    Assembly-CSharp.csproj  #"
-cat Assembly-CSharp.csproj
-echo "#    Change Framework    Assembly-CSharp-firstpass.csproj #"
-cat Assembly-CSharp-firstpass.csproj
-echo "#    Change Framework    Assembly-CSharp-Editor.csproj #"
-cat Assembly-CSharp-Editor.csproj
-echo "#    Change Framework    Assembly-CSharp-Editor-firstpass.csproj #"
-cat Assembly-CSharp-Editor-firstpass.csproj
+# echo "#    Change Framework    Assembly-CSharp.csproj  #"
+# cat Assembly-CSharp.csproj
+# echo "#    Change Framework    Assembly-CSharp-firstpass.csproj #"
+# cat Assembly-CSharp-firstpass.csproj
+# echo "#    Change Framework    Assembly-CSharp-Editor.csproj #"
+# cat Assembly-CSharp-Editor.csproj
+# echo "#    Change Framework    Assembly-CSharp-Editor-firstpass.csproj #"
+# cat Assembly-CSharp-Editor-firstpass.csproj
 
 echo ""
 echo "###########################"

@@ -40,7 +40,7 @@ xvfb-run --auto-servernum --server-args='-screen 0 640x480x24' \
 /opt/Unity/Editor/Unity \
   -batchmode \
   -nographics \
-  -logfile /dev/stdout \
+  -logfile ./artifacts/build_csproj_output.txt \
   -silent-crashes \
   -buildTarget "$BUILD_TARGET" \
   -customBuildTarget "$BUILD_TARGET" \

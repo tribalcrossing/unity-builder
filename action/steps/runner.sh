@@ -68,18 +68,6 @@ chmod -R 777 *
 dotnet restore workspace.sln
 dotnet restore Lit.Tests/Lit.Tests.sln
 nuget restore . -PackagesDirectory .
-# nuget restore workspace.sln
-# echo "nuget restore workspace.sln"
-# nuget restore Lit.Tests/Lit.Tests.sln
-# echo "nuget restore Lit.Tests/Lit.Tests.sln"
-# nuget restore Assembly-CSharp.csproj
-# echo "nuget restore Assembly-CSharp.csproj"
-# nuget restore Assembly-CSharp-firstpass.csproj
-# echo "nuget restore Assembly-CSharp-firstpass.csproj"
-# nuget restore Assembly-CSharp-Editor.csproj
-# echo "nuget restore Assembly-CSharp-Editor.csproj"
-# nuget restore Assembly-CSharp-Editor-firstpass.csproj
-# echo "nuget restore Assembly-CSharp-Editor-firstpass.csproj"
 ls -lasthr
 
 echo "do we have /github/workspace/packages.config"
@@ -106,14 +94,6 @@ sed -i 's/TargetFramework>net471<\/TargetFramework/TargetFramework>netcoreapp3.1
 sed -i 's/TargetFramework>net471<\/TargetFramework/TargetFramework>netcoreapp3.1<\/TargetFramework/g' Assembly-CSharp-Editor.csproj
 sed -i 's/TargetFramework>net471<\/TargetFramework/TargetFramework>netcoreapp3.1<\/TargetFramework/g' Assembly-CSharp-Editor-firstpass.csproj
 
-# echo "#    Change Framework    Assembly-CSharp.csproj  #"
-# cat Assembly-CSharp.csproj
-# echo "#    Change Framework    Assembly-CSharp-firstpass.csproj #"
-# cat Assembly-CSharp-firstpass.csproj
-# echo "#    Change Framework    Assembly-CSharp-Editor.csproj #"
-# cat Assembly-CSharp-Editor.csproj
-# echo "#    Change Framework    Assembly-CSharp-Editor-firstpass.csproj #"
-# cat Assembly-CSharp-Editor-firstpass.csproj
 
 echo ""
 echo "###########################"
@@ -122,13 +102,6 @@ echo "###########################"
 echo ""
 echo "Creating \"$FULL_ARTIFACTS_PATH\" if it does not exist."
 mkdir -p $FULL_ARTIFACTS_PATH
-
-echo ""
-echo "###########################"
-echo "#    Project directory    #"
-echo "###########################"
-echo ""
-ls -alh $UNITY_PROJECT_PATH
 
 
 echo ""
@@ -143,7 +116,10 @@ echo "########################"
 echo "#    Run Unit Test     #"
 echo "########################"
 echo ""
-dotnet test Lit.Tests/Lit.Tests.sln --no-restore --verbosity normal
+dotnet test Lit.Tests/Lit.Tests.sln --no-restore --logger "html;logfilename=test_result.html" --results-directory $FULL_ARTIFACTS_PATH
+
+UNIT_TEST_CODE =$?
+TEST_RUNNER_EXIT_CODE=$UNIT_TEST_CODE
 
 #
 # Results

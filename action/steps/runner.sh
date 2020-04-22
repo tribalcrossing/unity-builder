@@ -73,6 +73,7 @@ ls -lasthr
 echo "do we have /github/workspace/packages.config"
 ls /github/workspace/packages.config
 
+chmod -R 777 * 
 cd Lit.Tests
 dotnet tool install --global Project2015To2017.Migrate2019.Tool
 export PATH="$PATH:~/.dotnet/tools"
@@ -101,7 +102,7 @@ echo "#    Artifacts folder     #"
 echo "###########################"
 echo ""
 echo "Creating \"$FULL_ARTIFACTS_PATH\" if it does not exist."
-mkdir -p $FULL_ARTIFACTS_PATH
+mkdir -p artifacts
 
 
 echo ""
@@ -109,6 +110,7 @@ echo "###########################"
 echo "#  Restore Dependencies   #"
 echo "###########################"
 echo ""
+chmod -R 777 * 
 dotnet restore Lit.Tests/Lit.Tests.sln
 
 echo ""
@@ -120,12 +122,7 @@ echo ""
 echo $FULL_ARTIFACTS_PATH
 dotnet test Lit.Tests/Lit.Tests.sln --no-restore --logger "html;logfilename=test_result.html" --results-directory ./artifacts
 
-UNIT_TEST_CODE =$?
-TEST_RUNNER_EXIT_CODE=$UNIT_TEST_CODE
-
-#
-# Results
-#
+TEST_RUNNER_EXIT_CODE=$$?
 
 echo ""
 echo "###########################"

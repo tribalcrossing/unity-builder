@@ -117,7 +117,7 @@ echo ""
 echo $FULL_ARTIFACTS_PATH
 dotnet test Lit.Tests/Lit.Tests.sln --no-restore --logger "html;logfilename=test_result.html" --results-directory ./artifacts
 
-TEST_RUNNER_EXIT_CODE=$?
+BUILD_EXIT_CODE=$?
 
 echo ""
 echo "###########################"

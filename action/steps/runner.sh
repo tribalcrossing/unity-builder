@@ -46,6 +46,8 @@ xvfb-run --auto-servernum --server-args='-screen 0 640x480x24' \
   -customBuildTarget "$BUILD_TARGET" \
   -quit -executeMethod "UnityEditor.SyncVS.SyncSolution"
 
+echo ".csproj files built."
+ls -lasth
 
 echo "############################"
 echo "#    Install DotNet        #"
@@ -57,8 +59,8 @@ add-apt-repository universe
 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
 sh -c 'echo "deb https://download.mono-project.com/repo/ubuntu stable-bionic main" > /etc/apt/sources.list.d/mono-official-stable.list'
 apt-get update
-apt-get -y -qq install dirmngr gnupg apt-transport-https ca-certificates apt-utils
-apt-get -y -qq install dotnet-sdk-2.1 dotnet-sdk-3.1 mono-complete mono-devel nuget
+apt-get -y install dirmngr gnupg apt-transport-https ca-certificates apt-utils
+apt-get -y install dotnet-sdk-2.1 dotnet-sdk-3.1 mono-complete mono-devel nuget
 
 echo ""
 echo "###########################"

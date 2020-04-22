@@ -56,11 +56,15 @@ echo "############################"
 wget https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 dpkg -i packages-microsoft-prod.deb
 add-apt-repository universe
+apt-get update
+apt-get -y install dirmngr gnupg apt-transport-https ca-certificates apt-utils
 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
 sh -c 'echo "deb https://download.mono-project.com/repo/ubuntu stable-bionic main" > /etc/apt/sources.list.d/mono-official-stable.list'
 apt-get update
-apt-get -y install dirmngr gnupg apt-transport-https ca-certificates apt-utils
-apt-get -y install dotnet-sdk-2.1 dotnet-sdk-3.1 mono-complete mono-devel nuget
+apt-get -y -qq install dotnet-sdk-2.1
+apt-get -y -qq install dotnet-sdk-3.1
+apt-get update
+apt-get -y -qq install mono-complete mono-devel nuget
 
 echo ""
 echo "###########################"
@@ -72,6 +76,11 @@ chmod -R 777 *
 dotnet restore workspace.sln
 dotnet restore Lit.Tests/Lit.Tests.sln
 nuget restore . -PackagesDirectory .
+
+ls -lasthr
+
+echo "Do we have /github/workspace/packages.config?"
+ls /github/workspace/packages.config
 
 chmod -R 777 * 
 cd Lit.Tests
